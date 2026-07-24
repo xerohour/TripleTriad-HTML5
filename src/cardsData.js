@@ -104,7 +104,44 @@ export const CARDS = [
   { id: 68, name: 'Laguna', level: 10, stats: [5, 9, 10, 3], element: ELEMENTS.NONE, icon: '🔫' },
   { id: 69, name: 'Kiros', level: 10, stats: [6, 7, 6, 10], element: ELEMENTS.NONE, icon: '🔪' },
   { id: 70, name: 'Ward', level: 10, stats: [10, 8, 7, 2], element: ELEMENTS.NONE, icon: '🪓' },
-  { id: 71, name: 'Ultimecia', level: 10, stats: [10, 10, 8, 7], element: ELEMENTS.NONE, icon: '⌛' }
+  { id: 71, name: 'Ultimecia', level: 10, stats: [10, 10, 8, 7], element: ELEMENTS.NONE, icon: '⌛' },
+
+  // LEVEL 7 GF & Ancient Guardian Forces
+  { id: 72, name: 'Minotaur', level: 7, stats: [9, 5, 2, 8], element: ELEMENTS.EARTH, icon: '🐂' },
+  { id: 73, name: 'Sacred', level: 7, stats: [5, 1, 9, 9], element: ELEMENTS.EARTH, icon: '🛡️' },
+  { id: 74, name: 'Pandemona', level: 7, stats: [10, 1, 7, 7], element: ELEMENTS.WIND, icon: '🌪️' },
+  { id: 75, name: 'Cerberus', level: 7, stats: [7, 4, 6, 10], element: ELEMENTS.NONE, icon: '🐕' },
+  { id: 76, name: 'Phoenix', level: 7, stats: [9, 2, 7, 8], element: ELEMENTS.FIRE, icon: '🔥' },
+  { id: 77, name: 'Doomtrain', level: 7, stats: [3, 10, 1, 10], element: ELEMENTS.POISON, icon: '🚂' },
+
+  // LEVEL 8 Legendary GF & Secret Cards
+  { id: 78, name: 'Bahamut Prime', level: 8, stats: [10, 8, 9, 6], element: ELEMENTS.NONE, icon: '🐉' },
+  { id: 79, name: 'Jumbo Cactuar', level: 8, stats: [8, 10, 4, 4], element: ELEMENTS.NONE, icon: '🌵' },
+  { id: 80, name: 'Tonberry Master', level: 8, stats: [4, 4, 10, 8], element: ELEMENTS.NONE, icon: '🔪' },
+  { id: 81, name: 'Eden Prime', level: 8, stats: [4, 10, 4, 9], element: ELEMENTS.NONE, icon: '✨' },
+
+  // LEVEL 9 Main Characters
+  { id: 82, name: 'Ward Dincht', level: 9, stats: [8, 7, 2, 10], element: ELEMENTS.NONE, icon: '🪓' },
+  { id: 83, name: 'Kiros Seagill', level: 9, stats: [6, 7, 6, 10], element: ELEMENTS.NONE, icon: '🔪' },
+  { id: 84, name: 'Laguna Loire', level: 9, stats: [5, 9, 10, 3], element: ELEMENTS.NONE, icon: '🔫' },
+  { id: 85, name: 'Selphie Tilmitt', level: 9, stats: [10, 4, 8, 6], element: ELEMENTS.NONE, icon: '💛' },
+  { id: 86, name: 'Quistis Trepe', level: 9, stats: [9, 2, 6, 10], element: ELEMENTS.NONE, icon: '👓' },
+  { id: 87, name: 'Irvine Kinneas', level: 9, stats: [2, 10, 6, 9], element: ELEMENTS.NONE, icon: '🤠' },
+  { id: 88, name: 'Zell Martial', level: 9, stats: [8, 6, 5, 10], element: ELEMENTS.NONE, icon: '🥊' },
+  { id: 89, name: 'Rinoa Heartilly', level: 9, stats: [4, 10, 10, 2], element: ELEMENTS.NONE, icon: '🐶' },
+
+  // LEVEL 10 Ultimate Legends & Rare Companions
+  { id: 90, name: 'Sorceress Edea', level: 10, stats: [10, 10, 3, 3], element: ELEMENTS.NONE, icon: '🔮' },
+  { id: 91, name: 'Seifer Commander', level: 10, stats: [6, 9, 10, 4], element: ELEMENTS.NONE, icon: '⚔️' },
+  { id: 92, name: 'Squall Specialist', level: 10, stats: [10, 9, 4, 6], element: ELEMENTS.NONE, icon: '🗡️' },
+  { id: 93, name: 'Angelo Dog', level: 10, stats: [9, 3, 9, 7], element: ELEMENTS.NONE, icon: '🐕' },
+  { id: 94, name: 'Chicobo Chocobo', level: 10, stats: [4, 8, 9, 4], element: ELEMENTS.NONE, icon: '🐣' },
+  { id: 95, name: 'PuPu Alien', level: 10, stats: [3, 10, 2, 10], element: ELEMENTS.NONE, icon: '🛸' },
+  { id: 96, name: 'Gargantua Boss', level: 10, stats: [8, 6, 7, 9], element: ELEMENTS.NONE, icon: '👹' },
+  { id: 97, name: 'Mobile Type 8', level: 10, stats: [9, 7, 8, 6], element: ELEMENTS.NONE, icon: '🤖' },
+  { id: 98, name: 'Krysta Dragon', level: 10, stats: [7, 5, 8, 10], element: ELEMENTS.NONE, icon: '💎' },
+  { id: 99, name: 'Tiamat Fiend', level: 10, stats: [8, 8, 5, 9], element: ELEMENTS.FIRE, icon: '🐉' },
+  { id: 100, name: 'BGH251F2 Tank', level: 10, stats: [9, 8, 7, 7], element: ELEMENTS.THUNDER, icon: '🚜' }
 ];
 
 export const OPPONENTS = [

@@ -475,6 +475,8 @@ class TripleTriadApp {
     });
 
     unlockedCountEl.textContent = unlockedCount;
+    const totalCountEl = document.getElementById('total-count');
+    if (totalCountEl) totalCountEl.textContent = CARDS.length;
   }
 }
 
