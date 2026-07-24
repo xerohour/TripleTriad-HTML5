@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Fantasy VIII - Triple Triad HTML5</title>
+  <meta name="description" content="A dark mode HTML5 implementation of Final Fantasy VIII Triple Triad with Same, Plus, Same Wall, Combos, Elemental rules, smart AI, and audio effects.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Particle Background Canvas -->
+  <canvas id="fx-canvas"></canvas>
+
+  <!-- Header Bar -->
+  <header>
+    <div class="logo-container">
+      <div class="logo-icon">🎴</div>
+      <div class="logo-text">
+        <h1>Triple Triad</h1>
+        <span>Final Fantasy VIII</span>
+      </div>
+    </div>
+
+    <nav class="nav-tabs">
+      <button class="nav-btn active" data-target="battle-view">Battle</button>
+      <button class="nav-btn" data-target="deck-view">Deck Builder</button>
+      <button class="nav-btn" data-target="collection-view">Collection</button>
+    </nav>
+
+    <div class="controls-group">
+      <button id="btn-rules-modal" class="icon-btn" title="Rule Settings">⚙️</button>
+      <button id="btn-sound-toggle" class="icon-btn" title="Toggle Sound SFX">🔊</button>
+      <button id="btn-music-toggle" class="icon-btn" title="Toggle BGM">🎵</button>
+    </div>
+  </header>
+
+  <!-- Main View Area -->
+  <main>
+    <!-- 1. BATTLE VIEW -->
+    <section id="battle-view" class="view-section active">
+      <!-- Blue Player (Player 1) -->
+      <aside class="player-panel blue-panel">
+        <div class="player-header">
+          <div class="player-profile">
+            <div class="player-avatar">🗡️</div>
+            <div class="player-info">
+              <h3>Squall (You)</h3>
+              <span>SeeD Cadet</span>
+            </div>
+          </div>
+          <div id="blue-score" class="score-badge">5</div>
+        </div>
+        <div id="blue-hand" class="hand-container"></div>
+      </aside>
+
+      <!-- Center Board -->
+      <div class="board-container">
+        <div class="match-info-bar">
+          <div id="turn-indicator" class="turn-indicator blue-turn">BLUE TURN</div>
+          <div id="active-rules-pills" class="rules-active-pills"></div>
+          <select id="opponent-select" class="filter-select">
+            <!-- Opponents loaded dynamically -->
+          </select>
+        </div>
+
+        <div id="triple-triad-board" class="board-grid">
+          <!-- 9 board cells loaded dynamically -->
+        </div>
+
+        <button id="btn-restart-match" class="btn-primary">New Match</button>
+      </div>
+
+      <!-- Red Player (AI / Opponent) -->
+      <aside class="player-panel red-panel">
+        <div class="player-header">
+          <div class="player-profile">
+            <div class="player-avatar" id="opp-avatar">👨‍🎓</div>
+            <div class="player-info">
+              <h3 id="opp-name">Jack (CC Group)</h3>
+              <span id="opp-title">Balamb Student</span>
+            </div>
+          </div>
+          <div id="red-score" class="score-badge">5</div>
+        </div>
+        <div id="red-hand" class="hand-container"></div>
+      </aside>
+    </section>
+
+    <!-- 2. DECK BUILDER VIEW -->
+    <section id="deck-view" class="view-section">
+      <div class="deck-builder-grid">
+        <div class="card-catalog-panel">
+          <div class="catalog-header">
+            <h2>Card Catalog</h2>
+            <div class="filter-group">
+              <select id="filter-level" class="filter-select">
+                <option value="all">All Levels</option>
+                <option value="1">Level 1</option>
+                <option value="2">Level 2</option>
+                <option value="3">Level 3</option>
+                <option value="4">Level 4</option>
+                <option value="5">Level 5</option>
+                <option value="6">Level 6 (GF 1)</option>
+                <option value="7">Level 7 (GF 2)</option>
+                <option value="8">Level 8 (GF Legendary)</option>
+                <option value="9">Level 9 (Characters)</option>
+                <option value="10">Level 10 (Legendary)</option>
+              </select>
+            </div>
+          </div>
+          <div id="catalog-cards-grid" class="cards-scroll-grid"></div>
+        </div>
+
+        <div class="active-deck-panel">
+          <h2>Your 5-Card Deck</h2>
+          <p style="font-size:0.85rem; color:#94a3b8; margin: 0.5rem 0;">Click cards from catalog to select your battle deck.</p>
+          <div id="selected-deck-slots" class="deck-slot-list"></div>
+          <button id="btn-save-deck" class="btn-primary" style="width:100%; margin-top:1.5rem;">Save & Equip Deck</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. COLLECTION VIEW -->
+    <section id="collection-view" class="view-section">
+      <div class="card-catalog-panel" style="width:100%;">
+        <div class="catalog-header">
+          <h2>Complete Triple Triad Collection (<span id="unlocked-count">0</span> / 71)</h2>
+        </div>
+        <div id="full-collection-grid" class="cards-scroll-grid" style="max-height: 700px;"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MATCH RESULT MODAL -->
+  <div id="result-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h2 id="result-title" class="modal-title">VICTORY!</h2>
+      <p id="result-subtitle" style="color:#cbd5e1; font-size:1.1rem;">You won the match!</p>
+      
+      <div id="trade-reward-area" style="display:none; margin: 1rem 0;">
+        <h4 style="color:var(--gold-accent); margin-bottom:0.5rem;">Trade Rule: Claim 1 Opponent Card!</h4>
+        <div id="opp-trade-cards" style="display:flex; justify-content:center; gap:0.5rem; flex-wrap:wrap;"></div>
+      </div>
+
+      <button id="btn-modal-close" class="btn-primary">Continue</button>
+    </div>
+  </div>
+
+  <!-- RULES SETUP MODAL -->
+  <div id="rules-modal" class="modal-overlay">
+    <div class="modal-content" style="text-align:left;">
+      <h2 class="modal-title" style="text-align:center;">Match Rules</h2>
+      
+      <div style="display:flex; flex-direction:column; gap:0.8rem; margin:1rem 0;">
+        <label style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Open (Show hand cards)</span>
+          <input type="checkbox" id="rule-open" checked>
+        </label>
+        <label style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Same (Matching edge pairs flip)</span>
+          <input type="checkbox" id="rule-same" checked>
+        </label>
+        <label style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Plus (Equal sum pairs flip)</span>
+          <input type="checkbox" id="rule-plus" checked>
+        </label>
+        <label style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Same Wall (Outer walls = 10)</span>
+          <input type="checkbox" id="rule-samewall" checked>
+        </label>
+        <label style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Elemental (Element slot boost)</span>
+          <input type="checkbox" id="rule-elemental" checked>
+        </label>
+      </div>
+
+      <button id="btn-rules-save" class="btn-primary" style="width:100%;">Apply Rules</button>
+    </div>
+  </div>
+
+  <!-- JavaScript Entry Point -->
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
