@@ -56,7 +56,15 @@ export function createCardElement(card, options = {}) {
   // Card Art / Icon
   const cardArt = document.createElement('div');
   cardArt.className = 'card-art';
-  cardArt.textContent = card.icon || '🎴';
+  const img = document.createElement('img');
+  img.src = card.image || `assets/cards/${card.id}.png`;
+  img.alt = card.name;
+  img.className = 'card-img';
+  img.onerror = () => {
+    img.remove();
+    cardArt.textContent = card.icon || '🎴';
+  };
+  cardArt.appendChild(img);
 
   // Card Footer Name
   const footer = document.createElement('div');
